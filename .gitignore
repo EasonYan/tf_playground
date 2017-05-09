@@ -1,0 +1,8 @@
+# Data & Run files
+.ipynb_checkpoints/
+.ipynb_checkpoints/wide_and_deep_export-checkpoint.ipynb
+serving_savemodel
+
+# tmp files
+__pycache__/
+.DS_Store
