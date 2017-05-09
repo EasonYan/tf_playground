@@ -1,8 +1,8 @@
 # Data & Run files
-.ipynb_checkpoints/
-.ipynb_checkpoints/wide_and_deep_export-checkpoint.ipynb
-serving_savemodel
+wide_and_deep_tutorial/.ipynb_checkpoints/
+wide_and_deep_tutorial/.ipynb_checkpoints/wide_and_deep_export-checkpoint.ipynb
+wide_and_deep_tutorial/serving_savemodel
 
 # tmp files
-__pycache__/
-.DS_Store
+wide_and_deep_tutorial/__pycache__/
+wide_and_deep_tutorial/.DS_Store
