@@ -12,6 +12,13 @@ This tutorial consists of two parts:
 
 Before getting started, please complete the [prerequisites](https://tensorflow.github.io/serving/setup#prerequisites).
 
+Supplemental files:
+
+* wide_and_deep_export.ipynb
+
+* wide_and_deep_client.py
+
+
 ## Export TensorFlow Model
 
 Here's the last step taken from the Wide & Deep Learning Tutorial, where we train an estimator `m`:
@@ -125,7 +132,7 @@ import numpy as np
 import tensorflow as tf
 from grpc.beta import implementations
 from tensorflow_serving.apis import predict_pb2
-from tensorflow_serving.apis import prediction_service_pb2 
+from tensorflow_serving.apis import prediction_service_pb2
 
 tf.app.flags.DEFINE_string('server', 'localhost:9000',
                            'Server host:port.')
