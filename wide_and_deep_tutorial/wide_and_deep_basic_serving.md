@@ -1,4 +1,4 @@
-# Serving a TensorFlow Wide & Deep Model (tf.learn)
+# Exporting and Serving a TensorFlow Wide & Deep Model (tf.learn)
 
 This tutorial shows you how to export a TensorFlow Wide & Deep model and use the standard `tensorflow_model_server` to serve it.
 
