@@ -73,7 +73,7 @@ serving_input_fn = input_fn_utils.build_parsing_serving_input_fn(feature_spec)
 Export the model using `export_savedmodel()`:
 ~~~python
 servable_model_dir = "/tmp/serving_savemodel"
-servable_model_path = m.export_savedmodel(servable_model_dir, export_input_fn)
+servable_model_path = m.export_savedmodel(servable_model_dir, serving_input_fn)
 ~~~
 
 `export_savedmodel` will save the model in a savedmodel format and return the string path to the exported directory.
