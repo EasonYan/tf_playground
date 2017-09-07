@@ -40,7 +40,7 @@ To export estimator `m` there are four steps:
 
 2. Create a feature config.
 
-3. Build a `export_input_fn` suitable for use in serving.
+3. Build an `export_input_fn` suitable for use in serving.
 
 4. Export the model using `export_savedmodel()`.
 
@@ -59,7 +59,7 @@ feature_spec = tf.feature_column.make_parse_example_spec(feature_columns)
 `make_parse_example_spec` returns a dict mapping feature keys from `feature_columns` to `FixedLenFeature` or `VarLenFeature` values.
 
 
-Build a `export_input_fn` suitable for use in serving using `build_parsing_serving_input_receiver_fn()`:
+Build an `export_input_fn` suitable for use in serving using `build_parsing_serving_input_receiver_fn()`:
 ~~~python
 export_input_fn = tf.estimator.export.build_parsing_serving_input_receiver_fn(feature_spec)
 ~~~
