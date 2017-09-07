@@ -6,3 +6,4 @@ wide_and_deep_tutorial/serving_savemodel
 # tmp files
 wide_and_deep_tutorial/__pycache__/
 wide_and_deep_tutorial/.DS_Store
+tmp/

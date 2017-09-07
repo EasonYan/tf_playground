@@ -1,4 +1,4 @@
-# Exporting and Serving a TensorFlow Wide & Deep Model (tf.learn)
+# Exporting and Serving a TensorFlow Wide & Deep Model (tf.estimator)
 
 This tutorial shows you how to export a TensorFlow Wide & Deep model and use the standard `tensorflow_model_server` to serve it.
 
@@ -14,10 +14,11 @@ Before getting started, please complete the [prerequisites](https://tensorflow.g
 
 Supplemental files:
 
-* wide_and_deep_export.ipynb
+* wide_and_deep_export_r1.3.ipynb
 
 * wide_and_deep_client.py
 
+TensorFlow: r1.3+
 
 ## Export TensorFlow Model
 
@@ -39,41 +40,37 @@ To export estimator `m` there are four steps:
 
 2. Create a feature config.
 
-3. Build a `serving_input_fn` suitable for use in serving.
+3. Build a `export_input_fn` suitable for use in serving.
 
 4. Export the model using `export_savedmodel()`.
 
 
 Define estimator's features as a list of all features used during estimator initialization:
 ~~~python
-feature_columns = wide_columns + deep_columns
+feature_columns = crossed_columns + deep_columns
 ~~~
 
 
-Create a feature config using `create_feature_spec_for_parsing`:
+Create a feature config using `make_parse_example_spec()`:
 ~~~python
-from tensorflow.contrib.layers import create_feature_spec_for_parsing
-...
-feature_spec = create_feature_spec_for_parsing(feature_columns)
+feature_spec = tf.feature_column.make_parse_example_spec(feature_columns)
 ~~~
 
-`create_feature_spec_for_parsing` returns a dict mapping feature keys from `feature_columns` to `FixedLenFeature` or `VarLenFeature` values.
+`make_parse_example_spec` returns a dict mapping feature keys from `feature_columns` to `FixedLenFeature` or `VarLenFeature` values.
 
 
-Build a `serving_input_fn` suitable for use in serving using `input_fn_utils.build_parsing_serving_input_fn`:
+Build a `export_input_fn` suitable for use in serving using `build_parsing_serving_input_receiver_fn()`:
 ~~~python
-from tensorflow.contrib.learn.python.learn.utils import input_fn_utils
-...
-serving_input_fn = input_fn_utils.build_parsing_serving_input_fn(feature_spec)
+export_input_fn = tf.estimator.export.build_parsing_serving_input_receiver_fn(feature_spec)
 ~~~
 
-`build_parsing_serving_input_fn` parses the tf.Example according to the provided feature_spec, and returns all parsed Tensors as features. This `input_fn` is for use at serving time, so the labels return value is always None.
+`build_parsing_serving_input_receiver_fn` parses the tf.Example according to the provided feature_spec, and returns all parsed Tensors as features. This `input_fn` is for use at serving time, so the labels return value is always None.
 
 
 Export the model using `export_savedmodel()`:
 ~~~python
 servable_model_dir = "/tmp/serving_savemodel"
-servable_model_path = m.export_savedmodel(servable_model_dir, serving_input_fn)
+servable_model_path = m.export_savedmodel(servable_model_dir, export_input_fn)
 ~~~
 
 `export_savedmodel` will save the model in a savedmodel format and return the string path to the exported directory.
@@ -94,7 +91,7 @@ variables.data-00000-of-00001 variables.index
 * `variables` are files that hold the serialized variables of the graphs.
 
 
-Awesome! Now we have successfuly exported our Wide & Deep model for serving.
+Awesome! Now we have successfully exported our Wide & Deep model for serving.
 
 ## Load Exported Model With Standard TensorFlow Model Server
 
