@@ -52,7 +52,7 @@ def main(_):
   prediction = result_future.result().outputs['scores']
 
   print('True label: ' + str(label))
-  print('Prediction: ' + str(np.argmax(prediction)))
+  print('Prediction: ' + str(np.argmax(prediction.float_val)))
 
 if __name__ == '__main__':
   tf.app.run()
