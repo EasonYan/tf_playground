@@ -64,6 +64,11 @@ Build an `export_input_fn` suitable for use in serving using `build_parsing_serv
 export_input_fn = tf.estimator.export.build_parsing_serving_input_receiver_fn(feature_spec)
 ~~~
 
+For exporting `tf.contrib.estimator.Estimator` models, use:
+~~~python
+export_input_fn = tf.contrib.learn.build_parsing_serving_input_fn(feature_spec)
+~~~
+
 `build_parsing_serving_input_receiver_fn` parses the tf.Example according to the provided feature_spec, and returns all parsed Tensors as features. This `input_fn` is for use at serving time, so the labels return value is always None.
 
 
