@@ -59,9 +59,14 @@ feature_spec = tf.feature_column.make_parse_example_spec(feature_columns)
 `make_parse_example_spec` returns a dict mapping feature keys from `feature_columns` to `FixedLenFeature` or `VarLenFeature` values.
 
 
-Build an `export_input_fn` suitable for use in serving using `build_parsing_serving_input_receiver_fn()`:
+For exporting `tf.estimator.Estimator` build an `export_input_fn` suitable for use in serving with `build_parsing_serving_input_receiver_fn()`:
 ~~~python
 export_input_fn = tf.estimator.export.build_parsing_serving_input_receiver_fn(feature_spec)
+~~~
+
+NOTE: For exporting `tf.contrib.estimator.Estimator` models, use:
+~~~python
+export_input_fn = tf.contrib.learn.build_parsing_serving_input_fn(feature_spec)
 ~~~
 
 `build_parsing_serving_input_receiver_fn` parses the tf.Example according to the provided feature_spec, and returns all parsed Tensors as features. This `input_fn` is for use at serving time, so the labels return value is always None.
